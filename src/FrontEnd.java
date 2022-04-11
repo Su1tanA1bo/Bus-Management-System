@@ -1,4 +1,5 @@
 
+import java.io.FileNotFoundException;
 import java.util.*;
 
 
@@ -50,13 +51,36 @@ public class FrontEnd {
         if(userInput == 3) 
         {
         	//Search info using arrival time
+        	System.out.println("Enter the arrival time");
+        	String userInputTime = scanner.next();
+        	ArrivalTimes arrivalTimes = new ArrivalTimes();
+        	ArrayList<String> resultTimes = null;
+        	try {
+				resultTimes = arrivalTimes.findTrips(userInputTime);
+				for(String i: resultTimes) 
+	        	{
+	        		System.out.println(i);
+	        	}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				
+				//e.printStackTrace();
+			}
+        
+        	System.out.println("\n");
+        	
+        	
         }
         if(userInput == 4) 
         {
         	//terminate
         	return false;
         }
+        if(userInput > 4){
+        	System.out.println("Your answer must be less than 5");
+        }
         return true;
+        
 	}
 	public static void main(String[] args) {
 		boolean quitter = true;
