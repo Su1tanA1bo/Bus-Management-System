@@ -11,21 +11,34 @@ public class ArrivalTimes {
 		String line;
 		try {
 			Date userInputDate = format.parse(arrivalTime);
+			//System.out.println(userInputDate);
 			maxTime = format.parse("24:00:00");
 			ArrayList<String> CorrectTrips = new ArrayList<String>();
 			File fileName = new File("stop_times.txt");
 			Scanner scanner = new Scanner(fileName);
+			scanner.nextLine();
 			Scanner lineScanner = null;
-			while(scanner.hasNextLine()) 
+			int globalCounter = 0;
+			if(userInputDate.getTime() > maxTime.getTime()) 
 			{
+				System.out.println("Your answer must be less than 24:00:00");
+				return null;
+				
+			}
+			while(scanner.hasNext()) 
+			{
+				globalCounter++;
+				//System.out.println(globalCounter);
 				line = scanner.nextLine();
 				lineScanner = new Scanner(line);//will hold every line of stop times txt
 				lineScanner.useDelimiter(",");
 				lineScanner.next();
 				//now on arrival time
 				String currentLineTime = lineScanner.next();
+				//.out.println(currentLineTime);
 				Date currentTimeFormatted = format.parse(currentLineTime);
-				if(userInputDate.getTime() == currentTimeFormatted.getTime() && currentTimeFormatted.getTime() < maxTime.getTime()) 
+				//System.out.println(currentTimeFormatted);
+				if(userInputDate.getTime() == currentTimeFormatted.getTime()) 
 				{
 					//here only correct arrrival times will go
 					CorrectTrips.add(line);
@@ -36,8 +49,7 @@ public class ArrivalTimes {
 			CorrectTrips.sort(Comparator.naturalOrder());	
 			return CorrectTrips;
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Please make sure your answer is in the format: HH:MM:SS");
 		}
 			
 		return null;
