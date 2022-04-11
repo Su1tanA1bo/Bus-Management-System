@@ -119,7 +119,7 @@ public class TST {
         return x.val;
     }
 
-    // return subtrie corresponding to given key
+   
     private Node<String> get(Node<String> x, String key, int d) {
         if (x == null) return null;
         if (key.length() == 0) throw new IllegalArgumentException("key must have length >= 1");
@@ -144,7 +144,7 @@ public class TST {
             throw new IllegalArgumentException("calls put() with null key");
         }
         if (!contains(key)) n++;
-        else if (val == null) n--;       // delete existing key
+        else if (val == null) n--;     
         root = put(root, key, val, 0);
     }
 
@@ -180,8 +180,7 @@ public class TST {
         collect(x.mid, new StringBuilder(prefix), queue);
         return queue;
     }
-
-    // all keys in subtrie rooted at x with given prefix
+    
     private void collect(Node<String> x, StringBuilder prefix, Queue<String> queue) {
         if (x == null) return;
         collect(x.left, prefix, queue);
